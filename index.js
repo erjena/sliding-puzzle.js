@@ -34,11 +34,19 @@ function prettyPrint(state) {
 }
 
 function moveUp(state) {
-    
+    if (state.x === 0) {
+        return;
+    }
+    state.table[state.x][state.y] = state.table[state.x-1][state.y];
+    state.table[state.x-1][state.y] = 'x';
+    state.x = state.x-1;
 }
 
 function main() {
     var state = generateState();
+    prettyPrint(state);
+    moveUp(state);
+    moveUp(state);
     prettyPrint(state);
 }
 
