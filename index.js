@@ -1,3 +1,11 @@
+const readline = require('readline');
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
+
+
 function state(table, x, y) {
     this.table = table;
     this.x = x;
@@ -42,12 +50,67 @@ function moveUp(state) {
     state.x = state.x-1;
 }
 
+function moveDown(state) {
+    if (state.x === 3) {
+        return;
+    }
+    state.table[state.x][state.y] = state.table[state.x+1][state.y];
+    state.table[state.x+1][state.y] = 'x';
+    state.x = state.x+1;
+}
+
+function moveLeft(state) {
+    if (state.y === 0) {
+        return;
+    }
+    state.table[state.x][state.y] = state.table[state.x][state.y-1];
+    state.table[state.x][state.y-1] = 'x';
+    state.y = state.y-1;
+}
+
+function moveRight(state) {
+    if (state.y === 3) {
+        return;
+    }
+    state.table[state.x][state.y] = state.table[state.x][state.y+1];
+    state.table[state.x][state.y+1] = 'x';
+    state.y = state.y+1;
+}
+
+function randomShift() {
+    var arrOfFunctions = [moveUp, moveDown, moveLeft, moveRight];
+    var randomIndex = Math.floor(Math.random() * arrOfFunctions.length);
+    return arrOfFunctions[randomIndex];
+}
+
+
+function processInput(state) {
+    rl.question('Your move: ', function(answer) {
+        if (answer == 'u') {
+            moveUp(state);
+        } else if (answer == 'd') {
+            moveDown(state);
+        } else if (answer == 'l') {
+            moveLeft(state);
+        } else if (answer == 'r') {
+            moveRight(state);
+        } else {
+            console.log(`Enter 'u', 'd', 'l' or 'r'`);
+        }
+        prettyPrint(state);
+        processInput(state);
+    })
+}
+
 function main() {
     var state = generateState();
+
+    for (var i = 0; i < 15; i++) {
+        randomShift()(state);
+    }
     prettyPrint(state);
-    moveUp(state);
-    moveUp(state);
-    prettyPrint(state);
+
+    processInput(state);
 }
 
 main();
