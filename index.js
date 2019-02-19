@@ -5,11 +5,13 @@ const rl = readline.createInterface({
     output: process.stdout,
 });
 
+const TOTAL_MOVES = 15;
 
 function state(table, x, y) {
     this.table = table;
     this.x = x;
     this.y = y;
+    this.moveCount = 0;
 }
 
 function generateState() {
@@ -85,21 +87,31 @@ function randomShift() {
 
 
 function processInput(state) {
-    rl.question('Your move: ', function(answer) {
+    rl.question(`Left ${TOTAL_MOVES-state.moveCount}. Your move: `, function(answer) {
         if (answer == 'u') {
             moveUp(state);
+            state.moveCount++;
         } else if (answer == 'd') {
             moveDown(state);
+            state.moveCount++;
         } else if (answer == 'l') {
             moveLeft(state);
+            state.moveCount++;
         } else if (answer == 'r') {
             moveRight(state);
+            state.moveCount++;
         } else {
             console.log(`Enter 'u', 'd', 'l' or 'r'`);
         }
         prettyPrint(state);
+
+        if (state.moveCount >= TOTAL_MOVES) {
+            console.log(`Game Over! Try Again!`)
+            rl.close();
+            return;
+        }
         processInput(state);
-    })
+    });
 }
 
 function main() {
