@@ -1,10 +1,3 @@
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-});
-
 const TOTAL_MOVES = 15;
 
 function state(table, x, y) {
@@ -25,22 +18,13 @@ function generateState() {
 }
 
 function prettyPrint(state) {
+    var playBoard = document.getElementById('playBoard');
     var table = state.table;
-    var result = '';
     for (var i = 0; i < table.length; i++) {
         for (var j = 0; j < table[i].length; j++) {
-            if (j > 0) {
-                result += '  ';
-            }
-            if (table[i][j] === 'x' || table[i][j] < 10) {
-                result += ` ${table[i][j]}`;
-            } else {
-                result += table[i][j];
-            }
+            playBoard.rows[i].cells[j].innerHTML = table[i][j];
         }
-        result += '\n\n';
     }
-    console.log(result);
 }
 
 function moveUp(state) {
@@ -85,8 +69,7 @@ function randomShift() {
     return arrOfFunctions[randomIndex];
 }
 
-
-function processInput(state) {
+/*function processInput(state) {
     rl.question(`Left ${TOTAL_MOVES-state.moveCount}. Your move: `, function(answer) {
         if (answer == 'u') {
             moveUp(state);
@@ -113,6 +96,7 @@ function processInput(state) {
         processInput(state);
     });
 }
+*/
 
 function main() {
     var state = generateState();
@@ -122,7 +106,5 @@ function main() {
     }
     prettyPrint(state);
 
-    processInput(state);
+    //processInput(state);
 }
-
-main();
