@@ -69,37 +69,57 @@ function randomShift() {
     return arrOfFunctions[randomIndex];
 }
 
-/*function processInput(state) {
-    rl.question(`Left ${TOTAL_MOVES-state.moveCount}. Your move: `, function(answer) {
-        if (answer == 'u') {
-            moveUp(state);
-            state.moveCount++;
-        } else if (answer == 'd') {
-            moveDown(state);
-            state.moveCount++;
-        } else if (answer == 'l') {
-            moveLeft(state);
-            state.moveCount++;
-        } else if (answer == 'r') {
-            moveRight(state);
-            state.moveCount++;
-        } else {
-            console.log(`Enter 'u', 'd', 'l' or 'r'`);
-        }
-        prettyPrint(state);
+// function processInput(state) {
+//     rl.question(`Left ${TOTAL_MOVES-state.moveCount}. Your move: `, function(answer) {
+//         if (answer == 'u') {
+//             moveUp(state);
+//             state.moveCount++;
+//         } else if (answer == 'd') {
+//             moveDown(state);
+//             state.moveCount++;
+//         } else if (answer == 'l') {
+//             moveLeft(state);
+//             state.moveCount++;
+//         } else if (answer == 'r') {
+//             moveRight(state);
+//             state.moveCount++;
+//         } else {
+//             console.log(`Enter 'u', 'd', 'l' or 'r'`);
+//         }
+//         prettyPrint(state);
 
-        if (state.moveCount >= TOTAL_MOVES) {
-            console.log(`Game Over! Try Again!`)
-            rl.close();
-            return;
-        }
-        processInput(state);
-    });
+//         if (state.moveCount >= TOTAL_MOVES) {
+//             console.log(`Game Over! Try Again!`)
+//             rl.close();
+//             return;
+//         }
+//         processInput(state);
+//     });
+// }
+
+var state = generateState();
+
+function handleKeyPress(e) {
+    if (e == undefined) {
+        e = window.event;
+    }
+    if (e.keyCode === 97) {
+        moveLeft(state);
+        state.moveCount++;
+    } else if (e.keyCode === 100) {
+        moveRight(state);
+        state.moveCount++;
+    } else if (e.keyCode === 119) {
+        moveUp(state);
+        state.moveCount++;
+    } else if (e.keyCode === 115) {
+        moveDown(state);
+        state.moveCount++;
+    }
+    prettyPrint(state);
 }
-*/
 
-function main() {
-    var state = generateState();
+function handleBodyLoad() {
 
     for (var i = 0; i < 15; i++) {
         randomShift()(state);
