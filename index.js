@@ -25,6 +25,8 @@ function prettyPrint(state) {
             playBoard.rows[i].cells[j].innerHTML = table[i][j];
         }
     }
+    var moveCount = document.getElementById('moveCount');
+    moveCount.innerHTML = state.moveCount;
 }
 
 function moveUp(state) {
