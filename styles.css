@@ -7,11 +7,12 @@
     margin-right: auto;
     margin-top: 125px;
     height: 35px;
-    width: 75px;
+    width: 100px;
     border-radius: 12px;
-    border-color: rgba(177, 104, 10, 0.596);
+    /* border-color: rgba(177, 104, 10, 0.596); */
     background-color: white;
-    color :rgba(177, 104, 10, 0.596);
+    /* color :rgba(177, 104, 10, 0.596); */
+    font-size: 15px;
 }
 
 .gameContainer {
@@ -19,6 +20,7 @@
 }
 
 .gameContainer table {
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
     margin-top: 25px;
@@ -29,15 +31,14 @@
     border: 1.5px solid black;
     width: 100px;
     height: 100px;
-    background-color: rgba(177, 104, 10, 0.596);
+    /* background-color: rgba(177, 104, 10, 0.596);
     color: white;
-    border-color: white;
+    border-color: white; */
     text-align: center;
+    font-size: 20px;
 }
 
-.gameContainer span {
+.gameContainer span {  
     font-size: 20px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin: 500px;
-    color: rgba(177, 104, 10, 0.596);
+    /* color: rgba(177, 104, 10, 0.596); */
 }
