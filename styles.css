@@ -1,5 +1,43 @@
-td {
-    border: 1px solid black;
-    width: 36px;
-    height: 36px;
+.mainContainer {
+    text-align: center;
+}
+
+.mainContainer button {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 125px;
+    height: 35px;
+    width: 75px;
+    border-radius: 12px;
+    border-color: rgba(177, 104, 10, 0.596);
+    background-color: white;
+    color :rgba(177, 104, 10, 0.596);
+}
+
+.gameContainer {
+    text-align: center;
+}
+
+.gameContainer table {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    border-collapse: collapse;
+}
+
+.gameContainer table td {
+    border: 1.5px solid black;
+    width: 100px;
+    height: 100px;
+    background-color: rgba(177, 104, 10, 0.596);
+    color: white;
+    border-color: white;
+    text-align: center;
+}
+
+.gameContainer span {
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 500px;
+    color: rgba(177, 104, 10, 0.596);
 }

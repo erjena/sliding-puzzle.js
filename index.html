@@ -9,21 +9,26 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body onload="startGame()" onkeypress="handleKeyPress()">
-    <table id="playBoard">
-        <tr>
-            <td /><td /><td /><td />
-        </tr>
-        <tr>
-            <td /><td /><td /><td />
-        </tr>
-        <tr>
-            <td /><td /><td /><td />
-        </tr>
-        <tr>
-            <td /><td /><td /><td />
-        </tr>
-    </table>
-    <br> 
-    <span id="statusBoard"></span>
+    <div class="mainContainer">
+        <button onclick="startGame()">Start Over</button>
+    </div>
+    <div class="gameContainer">
+        <table id="playBoard">
+            <tr>
+                <td /><td /><td /><td />
+            </tr>
+            <tr>
+                <td /><td /><td /><td />
+            </tr>
+            <tr>
+                <td /><td /><td /><td />
+            </tr>
+            <tr>
+                <td /><td /><td /><td />
+            </tr>
+        </table>
+        <br> 
+        <span id="statusBoard"></span>
+    </div>   
 </body>
 </html>

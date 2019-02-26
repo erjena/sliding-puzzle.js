@@ -1,5 +1,3 @@
-const TOTAL_MOVES = 15;
-
 function generateState() {
     var table = [
         [1, 2, 3, 4],
@@ -12,7 +10,7 @@ function generateState() {
         table: table,
         x: 3,
         y: 3,
-        moveCount: 0,
+        moveCount: 15,
         isActive: true,
         isWon: false
     };
@@ -28,7 +26,7 @@ function prettyPrint(state) {
     }
     var statusBoard = document.getElementById('statusBoard');
     if (state.isActive) {
-        statusBoard.innerHTML = "Your number of moves: " + state.moveCount;
+        statusBoard.innerHTML = "Number of moves left: " + state.moveCount;
     } else if (state.isWon) {
         statusBoard.innerHTML = "You won!";
     } else {
@@ -82,44 +80,7 @@ function randomShift() {
     return arrOfFunctions[randomIndex];
 }
 
-var state = generateState();
-
-function handleKeyPress(e) {
-    if (e == undefined) {
-        e = window.event;
-    }
-    if (state.isActive === false) {
-        return;
-    }
-
-    if (e.keyCode === 97) {
-        if (moveLeft(state) === true) {
-            state.moveCount++;
-        }
-    } else if (e.keyCode === 100) {
-        if (moveRight(state) === true) {
-            state.moveCount++;
-        }    
-    } else if (e.keyCode === 119) {
-        if (moveUp(state) === true) {
-            state.moveCount++;
-        }
-    } else if (e.keyCode === 115) {
-        if (moveDown(state) === true) {
-            state.moveCount++;
-        }
-    }
-
-    if (isWinner()) {
-        state.isWon = true;
-        state.isActive = false;
-    } else if (state.moveCount >= TOTAL_MOVES) {
-        state.isActive = false;
-    }
-    prettyPrint(state);
-}
-
-function isWinner() {
+function isWinner(state) {
     var table = [
         [1, 2, 3, 4],
         [5, 6, 7, 8],
@@ -129,8 +90,53 @@ function isWinner() {
     return JSON.stringify(table) == JSON.stringify(state.table);
 }
 
+////////////////////////////////////////////////////////////////////////////
+
+var handleKeyPress = function(e) {
+    console.log("not implemented yet");
+}
+
+function handleKeyPressGenerator(state) {
+    return function (e) {
+        if (e == undefined) {
+            e = window.event;
+        }
+        if (state.isActive === false) {
+            return;
+        }
+
+        if (e.keyCode === 97) {
+            if (moveLeft(state) === true) {
+                state.moveCount--;
+            }
+        } else if (e.keyCode === 100) {
+            if (moveRight(state) === true) {
+                state.moveCount--;
+            }    
+        } else if (e.keyCode === 119) {
+            if (moveUp(state) === true) {
+                state.moveCount--;
+            }
+        } else if (e.keyCode === 115) {
+            if (moveDown(state) === true) {
+                state.moveCount--;
+            }
+        }
+
+        if (isWinner(state)) {
+            state.isWon = true;
+            state.isActive = false;
+        } else if (state.moveCount === 0) {
+            state.isActive = false;
+        }
+        prettyPrint(state);
+    }
+}
+
 function startGame() {
-    for (var i = 0; i < 1; i++) {
+    var state = generateState();
+    handleKeyPress = handleKeyPressGenerator(state);
+    for (var i = 0; i < 10; i++) {
         randomShift()(state);
     }
     prettyPrint(state);
